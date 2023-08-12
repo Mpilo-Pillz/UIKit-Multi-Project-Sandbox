@@ -24,21 +24,22 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func searchPressed(_ sender: UIButton) {
-        searchTextField.endEditing(true)
+        searchTextField.endEditing(true) // we are manually putting the textfield on end editing mode
         print(searchTextField.text!)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchTextField.endEditing(true)
+        searchTextField.endEditing(true) // end etiting and dismiss the keyboard
         print(searchTextField.text!)
         return true
     }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        // normally used to perform some validation
         if textField.text != "" {
-            return true
+            return true // let the end editing 
         } else {
             textField.placeholder = "Type something"
-            return false
+            return false // keep user in editing mode
         }
         
     }
@@ -47,7 +48,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         if let city = searchTextField.text {
             weatherManager.fetchWeather(cityName: city)
         }
-        searchTextField.text = ""
+        searchTextField.text = "" // saves us doing it twice after line 26 or after line 31
     }
     
 }
