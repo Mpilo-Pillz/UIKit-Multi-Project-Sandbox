@@ -13,8 +13,36 @@ struct WeatherManager {
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=\(ProcessInfo.processInfo.environment["API_KEY"] ?? "")&units=metric"
     
     func fetchWeather(cityName: String) {
-        print(ProcessInfo.processInfo.environment["API_KEY"] ?? "")
         let urlString = "\(weatherURL)&q=\(cityName)"
-        print(urlString)
+        performRequest(urlString: urlString)
+    }
+    
+    func performRequest(urlString: String) {
+        //1. Create URL
+        if let url = URL(string: urlString) {
+            //2. Create a URL Session
+            let session = URLSession(configuration: .default)
+            
+            //3. Give th session a task
+            let task = session.dataTask(with: url, completionHandler: handle(data:response:error:))
+            
+            //4. Start the task
+            task.resume() // called resume and not start becuase they start of in a suspended state
+        }
+        
+        
+    }
+    
+    func handle(data: Data?, response: URLResponse?, error: Error?) -> Void {
+        if error != nil {
+            print(error!) // can force unwrap because we already checked if it is not nil
+            return
+        }
+        
+        if let safeData = data {
+            // tough to print responses we have to first convert to a string
+            let dataString = String(data: safeData, encoding: .utf8)
+            print(dataString)
+        }
     }
 }
