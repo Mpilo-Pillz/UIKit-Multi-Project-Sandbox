@@ -53,9 +53,23 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         searchTextField.text = "" // saves us doing it twice after line 26 or after line 31
     }
     
-    func didUpdateWeather(weather: WeatherModel) {
+//    func didUpdateWeather(weather: WeatherModel) {
+//        print("Did update weateher\(weather)")
+//    }
+    
+//    func didUpdateWeather(weatherManager: WeatherManager, weather: WeatherModel) {
+//        print("Did update weateher\(weather)")
+//    }
+    
+    // Following Apples naming convention
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
         print("Did update weateher\(weather)")
     }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
     
 }
 
