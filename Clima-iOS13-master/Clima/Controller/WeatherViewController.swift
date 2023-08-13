@@ -63,7 +63,19 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
     
     // Following Apples naming convention
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
-        print("Did update weateher\(weather)")
+//        temperatureLabel.text = weather.temperatureString // UILabel.text must be used from main thread only
+//        print("Did update weateher\(weather)")
+        
+//        DispatchQueue.main.async { [self] in
+//            temperatureLabel.text = weather.temperatureString
+//            conditionImageView.image = UIImage(systemName: weather.conditionName)
+//        }
+
+        
+        DispatchQueue.main.async {
+            self.temperatureLabel.text = weather.temperatureString
+            self.conditionImageView.image = UIImage(systemName: weather.conditionName)
+        }
     }
     
     func didFailWithError(error: Error) {
