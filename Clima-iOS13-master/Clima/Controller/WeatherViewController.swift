@@ -8,8 +8,9 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController, UITextFieldDelegate {
 
+class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
+    
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
@@ -20,7 +21,8 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchTextField.delegate = self
+        weatherManager.delegate = self // this is sooo forgettable
+        searchTextField.delegate = self // super forgettable
     }
 
     @IBAction func searchPressed(_ sender: UIButton) {
@@ -49,6 +51,10 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
             weatherManager.fetchWeather(cityName: city)
         }
         searchTextField.text = "" // saves us doing it twice after line 26 or after line 31
+    }
+    
+    func didUpdateWeather(weather: WeatherModel) {
+        print("Did update weateher\(weather)")
     }
     
 }

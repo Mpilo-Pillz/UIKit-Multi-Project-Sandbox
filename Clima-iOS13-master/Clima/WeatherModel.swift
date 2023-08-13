@@ -43,6 +43,7 @@ struct WeatherModel {
     
     
     func getConditionName(weatherId: Int) -> String {
+        // kept for reference
         switch weatherId {
         case 200...232:
             return "cloud.bolt"
