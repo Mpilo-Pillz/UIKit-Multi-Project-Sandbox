@@ -17,7 +17,48 @@ struct CoinManager {
     
     func getCoinPrice(for currency: String) {
         print("curren \(currency)")
+        let urlString = "\(baseURL)/\(currency)?apiKey=\(ProcessInfo.processInfo.environment["API_KEY"] ?? apiKey)"
+        
+        performRequest(with: urlString)
+        
+        
     }
-
+    
+    func performRequest(with urlString: String) {
+        if let url = URL(string: urlString) {
+            let session = URLSession(configuration: .default)
+            
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error ?? "Failed To Fetch")
+                    return
+                }
+                
+                if let safeData = data {
+                    if let coin = parseJSON(safeData) {
+                        print(coin)
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    func parseJSON(_ coinData: Data) -> CoinModel? {
+        let decoder = JSONDecoder()
+        do {
+            let decodedData = try decoder.decode(CoinData.self, from: coinData)
+            let time = decodedData.time
+            let asset_id_base = decodedData.asset_id_base
+            let rate = decodedData.rate
+            let asset_id_quote = decodedData.asset_id_quote
+            
+            let coin = CoinModel(time: time, assetIdBase: asset_id_base, assetIdQuote: asset_id_quote, rate: rate)
+            return coin
+        } catch {
+            print(error)
+            return nil
+        }
+    }
     
 }
