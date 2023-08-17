@@ -8,12 +8,24 @@
 
 import Foundation
 
+protocol CoinManagerDelegate {
+    func didUpdatePrice(_ coinManager: CoinManager, coin: CoinModel)
+    func didFailWithError(error: Error)
+}
+
 struct CoinManager {
+    
+    var delegate: CoinManagerDelegate?
+    
+    // Wated alot of my time becuase it wanted me to pass the delegate as an argument to the constructor
+//    let delegate: CoinManagerDelegate?
     
     let baseURL = "https://rest.coinapi.io/v1/exchangerate/BTC"
     let apiKey = "YOUR_API_KEY_HERE"
     
     let currencyArray = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
+    
+    
     
     func getCoinPrice(for currency: String) {
         print("curren \(currency)")
@@ -37,6 +49,7 @@ struct CoinManager {
                 if let safeData = data {
                     if let coin = parseJSON(safeData) {
                         print(coin)
+                        delegate?.didUpdatePrice(self, coin: coin)
                     }
                 }
             }
@@ -57,6 +70,7 @@ struct CoinManager {
             return coin
         } catch {
             print(error)
+            delegate?.didFailWithError(error: error)
             return nil
         }
     }
