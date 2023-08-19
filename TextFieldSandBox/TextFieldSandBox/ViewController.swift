@@ -86,7 +86,7 @@ extension ViewController: UITextFieldDelegate {
 // MARK: - Extra Actions
 extension ViewController {
     @objc func textFieldEditingChanged(_ sender: UITextField) {
-        print("Extra - textFieldEditingChanged: \(sender.text)")
+        print("Extra - textFieldEditingChanged: \(String(describing: sender.text))")
     }
 }
 
