@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var titleLabel: UILabel!
     let softTime = 5
     let mediumTime = 7
@@ -25,6 +26,7 @@ class ViewController: UIViewController {
 
     @IBAction func hardnessSelected(_ sender: UIButton) {
         
+        progressBar.progress = 1.0
         timer.invalidate()
         
         let hardness = sender.currentTitle ?? "Medium"
