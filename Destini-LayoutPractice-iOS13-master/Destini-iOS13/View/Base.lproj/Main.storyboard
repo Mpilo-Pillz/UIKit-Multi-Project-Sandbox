@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
@@ -14,23 +14,23 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Destini_iOS13" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="4hB-Iq-Mcs">
-                                <rect key="frame" x="0.0" y="0.0" width="904" height="414"/>
+                                <rect key="frame" x="0.0" y="0.0" width="422" height="896"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="e9z-pK-b2G">
-                                <rect key="frame" x="48" y="0.0" width="800" height="393"/>
+                                <rect key="frame" x="20" y="48" width="374" height="814"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Story Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gg6-uR-K4p">
-                                        <rect key="frame" x="0.0" y="0.0" width="800" height="153"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="574"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMl-Yf-vfd">
-                                        <rect key="frame" x="0.0" y="173" width="800" height="100"/>
+                                        <rect key="frame" x="0.0" y="594" width="374" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="4Op-9p-ZrZ"/>
                                         </constraints>
@@ -41,7 +41,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ua-8a-TBZ">
-                                        <rect key="frame" x="0.0" y="293" width="800" height="100"/>
+                                        <rect key="frame" x="0.0" y="714" width="374" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Scy-Nz-97W"/>
                                         </constraints>
@@ -57,13 +57,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="4hB-Iq-Mcs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="FQs-47-izL"/>
                             <constraint firstItem="e9z-pK-b2G" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="SQt-G3-tas"/>
-                            <constraint firstItem="4hB-Iq-Mcs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="UpF-Gr-ngX"/>
-                            <constraint firstItem="e9z-pK-b2G" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WQN-Kg-O5h"/>
-                            <constraint firstItem="4hB-Iq-Mcs" firstAttribute="trailingMargin" secondItem="e9z-pK-b2G" secondAttribute="trailingMargin" id="exy-ZD-Lhh"/>
+                            <constraint firstItem="e9z-pK-b2G" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="WQN-Kg-O5h"/>
+                            <constraint firstItem="4hB-Iq-Mcs" firstAttribute="trailingMargin" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="exy-ZD-Lhh"/>
                             <constraint firstAttribute="bottom" secondItem="4hB-Iq-Mcs" secondAttribute="bottom" id="oDi-MW-Sk9"/>
                             <constraint firstItem="4hB-Iq-Mcs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="pVo-wg-Srt"/>
-                            <constraint firstItem="e9z-pK-b2G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="q07-AJ-lb4"/>
+                            <constraint firstItem="e9z-pK-b2G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="q07-AJ-lb4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e9z-pK-b2G" secondAttribute="bottom" id="tFS-IA-6ma"/>
                         </constraints>
                     </view>
