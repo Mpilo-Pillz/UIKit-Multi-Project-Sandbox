@@ -39,6 +39,9 @@
                                         <state key="normal" title="Choice 1" backgroundImage="choice1Background">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="choiceMade:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cOE-4H-96u"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ua-8a-TBZ">
                                         <rect key="frame" x="0.0" y="714" width="374" height="100"/>
@@ -50,6 +53,9 @@
                                         <state key="normal" title="Choice 2" backgroundImage="choice2Background">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="choiceMade:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fka-eD-5i8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -67,6 +73,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e9z-pK-b2G" secondAttribute="bottom" id="tFS-IA-6ma"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="choice1Button" destination="QMl-Yf-vfd" id="mug-ze-SYd"/>
+                        <outlet property="choice2Button" destination="5ua-8a-TBZ" id="Kgk-O8-4KB"/>
+                        <outlet property="storyLabel" destination="gg6-uR-K4p" id="A1w-0C-48L"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
