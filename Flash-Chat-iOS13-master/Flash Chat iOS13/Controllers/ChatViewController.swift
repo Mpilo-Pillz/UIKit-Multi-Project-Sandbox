@@ -67,6 +67,10 @@ class ChatViewController: UIViewController {
                             */
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
+                                
+                                // Show the latest message
+                                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
                             }
                             
                         }
@@ -87,9 +91,16 @@ class ChatViewController: UIViewController {
                 if let e = error {
                     print("there was an issue saving data to firesotre. \(e)")
                 } else {
-                    print(
-                        "successfully saved data"
-                    )
+                    print("successfully saved data")
+                    
+                    /**
+                     * Remeber that when insie a closure and want to update user interface
+                     * Do it in the dispatch queue
+                     */
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
+                    
                 }
             }
         }
