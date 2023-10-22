@@ -32,7 +32,43 @@ class ChatViewController: UIViewController {
         
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         
+        loadMessages()
         
+    }
+    
+    func loadMessages() {
+        messages = []
+        
+        db.collection(K.FStore.collectionName).getDocuments { querySnapshot, error in
+            if let e = error {
+                print("There was an issue retrieving data from Firestore")
+            } else {
+                if let snapshotDocuments = querySnapshot?.documents {
+                    for doc in snapshotDocuments {
+                        let data = doc.data()
+                        if let messageSender = data[K.FStore.senderField] as? String, let messageBody = data[K.FStore.bodyField] as? String {
+                            let newMessage = Message(sender: messageSender, body: messageBody)
+                            self.messages.append(newMessage)
+                            
+                           /**
+                            * this is an async task so by the time we
+                            * By the time we paint the objects into the screen
+                            * the messages call migth not have completed
+                            * need to reload the data to refresh the view
+                            * Remeber that the call happens in the background
+                            * When we are redady to update witht he new messages
+                            * Fetch the main thread and update the data in the main thread
+                            */
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                            
+                        }
+                    }
+                }
+//                querySnapshot?.documents[0].data()[K.FStore.senderField] // this code is terse
+            }
+        }
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
