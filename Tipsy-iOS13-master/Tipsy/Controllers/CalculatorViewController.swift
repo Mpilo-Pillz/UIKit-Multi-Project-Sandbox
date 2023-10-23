@@ -16,17 +16,45 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var splitNumberLabel: UILabel!
     @IBOutlet weak var billTextField: UITextField!
     
+    var tip = 0.10
+    var numberOfPeople = 2
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
     @IBAction func tipChanged(_ sender: UIButton) {
-        print("changed \(sender.titleLabel?.text)")
+        
+        //Deselect all tip buttons via IBOutlets
+        zeroPctButton.isSelected = false
+        tenPctButton.isSelected = false
+        twentyPctButton.isSelected = false
+        
+        //Make the button that triggered the IBAction selected
+        sender.isSelected = true
+        
+        //Get the current title of the button that was pressed.
+        let buttonTitle = sender.currentTitle!
+        
+        //Remove the last character (%) from the title then turn it back into a String.
+        let buttonTitleMinusPercentSign = String(buttonTitle.dropLast())
+        
+        //Turn the String into a Double.
+        let buttonTitleAsANumber = Double(buttonTitleMinusPercentSign)!
+        
+        //Divide the percent expressed out of 100 into a decimal e.g. 10 becomes 0.1
+        tip = buttonTitleAsANumber / 100
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        print("STEp value changed")
+        //Get the stepper value using sender.value, round it down to a whole number then set it as the text in
+        //the splitNumberLabel
+        splitNumberLabel.text = String(format: "%.0f", sender.value)
+        
+        print("Plint--> \(sender.value)")
+        numberOfPeople = Int(sender.value)
+
     }
     @IBAction func calculatePressed(_ sender: UIButton) {
         print("calculate pressed")
