@@ -1,5 +1,5 @@
 //
-//  ResultsViewControllerViewController.swift
+//  ResultsViewController.swift
 //  Tipsy
 //
 //  Created by Mpilo Pillz on 2023/10/23.
@@ -8,15 +8,19 @@
 
 import UIKit
 
-class ResultsViewControllerViewController: UIViewController {
+class ResultsViewController: UIViewController {
 
+    @IBOutlet weak var settingsLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func recalculatePressed(_ sender: UIButton) {
+    }
+    
     /*
     // MARK: - Navigation
 
