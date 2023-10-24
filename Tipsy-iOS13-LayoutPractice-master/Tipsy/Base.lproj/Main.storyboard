@@ -182,6 +182,7 @@
                     </view>
                     <connections>
                         <outlet property="billTextField" destination="hoc-4I-eJO" id="vf2-Ye-TWw"/>
+                        <outlet property="calculateButton" destination="d7D-jB-bMY" id="rMY-Kr-vPO"/>
                         <outlet property="splitNumberLabel" destination="b3A-Bj-XTX" id="r7O-FH-MWo"/>
                         <outlet property="tenPctButton" destination="Rwu-A9-VfH" id="lg5-SI-iQc"/>
                         <outlet property="twentyPctButton" destination="CKa-YD-tVk" id="0AS-Wk-Oji"/>

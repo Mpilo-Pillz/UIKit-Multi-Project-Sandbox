@@ -14,6 +14,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var twentyPctButton: UIButton!
     @IBOutlet weak var tenPctButton: UIButton!
     @IBOutlet weak var zeroPctButton: UIButton!
+    @IBOutlet weak var calculateButton: UIButton!
     @IBOutlet weak var billTextField: UITextField!
     
     var tipAmount = 0.10
@@ -23,6 +24,13 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        calculateButton.isEnabled = false
+        billTextField.delegate = self
+        
+        calculateButton.setBackgroundColor(.systemGray, for: .disabled)
+        calculateButton.setBackgroundColor(.systemGreen, for: .normal)
+//        calculateButton.setTitleColor(.systemGreen, for: .normal)
+//        calculateButton.setTitleColor(.systemGray, for: .disabled)
         // Do any additional setup after loading the view.
     }
 
@@ -51,16 +59,12 @@ class CalculatorViewController: UIViewController {
     @IBAction func calculatePressed(_ sender: UIButton) {
         
         let totalBill = Double(billTextField.text!)! // TODO refactor
-        
-        if billTextField.text! != "" {
+     
             billPerPerson = (totalBill + (totalBill * tipAmount) ) / Double(numberOfPeople)
             let billInTwoDecimal = String(format: "%.2f", billPerPerson)
             finalResult = billInTwoDecimal
             print(finalResult)
-        } else {
-            print("show Error and disable button")
-            
-        }
+        
         
         self.performSegue(withIdentifier: "showCalculationResult", sender: self)
     }
@@ -75,4 +79,29 @@ class CalculatorViewController: UIViewController {
         }
     }
 }
+
+extension CalculatorViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        calculateButton.isEnabled = !newText.isEmpty && Double(newText)! > 0
+        return true
+    }
+    
+
+}
+
+extension UIButton {
+    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
+        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+        if let context = UIGraphicsGetCurrentContext() {
+            context.setFillColor(color.cgColor)
+            context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+            let colorImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            setBackgroundImage(colorImage, for: state)
+        }
+    }
+}
+
 
