@@ -10,7 +10,7 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
 
-    let itemArray = ["Finish this chapter", "Re do Tipsy", "Build my app"]
+    var itemArray = ["Finish this chapter", "Re do Tipsy", "Build my app"]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -42,7 +42,34 @@ class TodoListViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
+    //MARK - Add New Items
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { action in
+            // Wha happens once user clicks the add Item on out UI Alert
+            print(textField.text)
+            self.itemArray.append(textField.text!)
+            
+            self.tableView.reloadData() // reload the data so the the table refreshes. Kind of like angulars change detection
+            // force unwrap beaucse the value of the textfield will never be nil it woll be empty string
+        }
+        
+        alert.addTextField { alertTexField in
+            alertTexField.placeholder = "Create new item"
+            textField = alertTexField
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 
