@@ -11,8 +11,17 @@ import UIKit
 class TodoListViewController: UITableViewController {
 
     var itemArray = ["Finish this chapter", "Re do Tipsy", "Build my app"]
+    
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // get the todos form info plsist local storage saved form last session
+//        itemArray = defaults.array(forKey: "TodoListArray") as! [String]
+        if let items  = defaults.array(forKey: "TodoListArray") as? [String] {
+            itemArray = items
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -53,8 +62,11 @@ class TodoListViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
             // Wha happens once user clicks the add Item on out UI Alert
-            print(textField.text)
+            
             self.itemArray.append(textField.text!)
+            
+            // this is gonna be saved in the info plist
+            self.defaults.set(self.itemArray, forKey: "TodoListArray") // save to local storage
             
             self.tableView.reloadData() // reload the data so the the table refreshes. Kind of like angulars change detection
             // force unwrap beaucse the value of the textfield will never be nil it woll be empty string
