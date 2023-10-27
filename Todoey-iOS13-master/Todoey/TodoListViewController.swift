@@ -10,18 +10,31 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
 
-    var itemArray = ["Finish this chapter", "Re do Tipsy", "Build my app"]
+//    var itemArray = ["Finish this chapter", "Re do Tipsy", "Build my app", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "z", "x", "c", "v", "m"]
+    var itemArray = [Item]()
     
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let newItem = Item()
+        newItem.title = "Finish this chapter"
+        itemArray.append(newItem)
+        
+        let newItem2 = Item()
+        newItem2.title = "Re do Tipsy"
+        itemArray.append(newItem2)
+        
+        let newItem3 = Item()
+        newItem3.title = "Build my app"
+        itemArray.append(newItem3)
+        
         // get the todos form info plsist local storage saved form last session
 //        itemArray = defaults.array(forKey: "TodoListArray") as! [String]
-        if let items  = defaults.array(forKey: "TodoListArray") as? [String] {
-            itemArray = items
-        }
+//        if let items  = defaults.array(forKey: "TodoListArray") as? [String] {
+//            itemArray = items
+//        }
         // Do any additional setup after loading the view.
     }
     
@@ -32,7 +45,8 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
-        cell.textLabel?.text = itemArray[indexPath.row]
+//        cell.textLabel?.text = itemArray[indexPath.row]
+        cell.textLabel?.text = itemArray[indexPath.row].title
        
         return cell
     }
@@ -63,7 +77,9 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
             // Wha happens once user clicks the add Item on out UI Alert
             
-            self.itemArray.append(textField.text!)
+            let newItem = Item() // now an object
+            newItem.title = textField.text!
+//            self.itemArray.append(textField.text!)
             
             // this is gonna be saved in the info plist
             self.defaults.set(self.itemArray, forKey: "TodoListArray") // save to local storage
