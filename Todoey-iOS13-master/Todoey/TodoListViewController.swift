@@ -33,7 +33,9 @@ class TodoListViewController: UITableViewController {
         
     
        
-        
+        if let items  = defaults.array(forKey: "TodoListArray") as? [Item] {
+                    itemArray = items
+                }
         
         
         // get the todos form info plsist local storage saved form last session
