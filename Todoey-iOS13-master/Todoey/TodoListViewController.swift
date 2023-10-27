@@ -24,11 +24,17 @@ class TodoListViewController: UITableViewController {
         
         let newItem2 = Item()
         newItem2.title = "Re do Tipsy"
+        newItem2.done = false
         itemArray.append(newItem2)
         
         let newItem3 = Item()
         newItem3.title = "Build my app"
         itemArray.append(newItem3)
+        
+    
+       
+        
+        
         
         // get the todos form info plsist local storage saved form last session
 //        itemArray = defaults.array(forKey: "TodoListArray") as! [String]
@@ -44,11 +50,23 @@ class TodoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("cell for row at index path called")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        
 //        cell.textLabel?.text = itemArray[indexPath.row]
-        cell.textLabel?.text = itemArray[indexPath.row].title
+//        cell.textLabel?.text = itemArray[indexPath.row].title
+        
+        let item = itemArray[indexPath.row]
+        cell.textLabel?.text = item.title
        
+        cell.accessoryType = item.done ? .checkmark : .none
         return cell
+//        if item.done == true {
+//            cell.accessoryType = .checkmark
+//        } else {
+//            cell.accessoryType = .none
+//        }
+        
     }
     
     // MARK - Tableview Delegate Methods
@@ -57,11 +75,21 @@ class TodoListViewController: UITableViewController {
         
         
         
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        
+//        if itemArray[indexPath.row].done == false {
+//            itemArray[indexPath.row].done = true
+//        } else {
+//            itemArray[indexPath.row].done = false
+//        }
+        
+        tableView.reloadData() // call the data source methods again to reload the data
+        
+//        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+//            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+//        } else {
+//            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+//        }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
