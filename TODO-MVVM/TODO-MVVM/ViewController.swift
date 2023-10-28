@@ -3,7 +3,7 @@
 //  TODO-MVVM
 //
 //  Created by Mpilo Pillz on 2023/10/28.
-//
+// Now, we need to create the TodoListView. This view will display a list of todo items, a checkmark for completed tasks, and a "+" button to add new tasks.
 
 import UIKit
 
