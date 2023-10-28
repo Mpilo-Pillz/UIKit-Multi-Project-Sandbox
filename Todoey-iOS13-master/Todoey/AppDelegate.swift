@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("did dinishe launching with options, when the app first loads up happens before view did load")
         
         // where the file will be stored for the simulators saved local storage and th einfo plist (the sand box)
-        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String)
+//        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String)
         
         return true
     }

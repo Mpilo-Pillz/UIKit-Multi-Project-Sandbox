@@ -13,29 +13,32 @@ class TodoListViewController: UITableViewController {
 //    var itemArray = ["Finish this chapter", "Re do Tipsy", "Build my app", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "z", "x", "c", "v", "m"]
     var itemArray = [Item]()
     
-    let defaults = UserDefaults.standard
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Itemss.plist") // usrDomainMask is home dir
+    
+//    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let newItem = Item()
         newItem.title = "Finish this chapter"
+//        newItem.done = false
         itemArray.append(newItem)
         
         let newItem2 = Item()
         newItem2.title = "Re do Tipsy"
-        newItem2.done = false
+//        newItem2.done = false
         itemArray.append(newItem2)
         
         let newItem3 = Item()
         newItem3.title = "Build my app"
+//        newItem3.done = false
         itemArray.append(newItem3)
         
     
-       
-        if let items  = defaults.array(forKey: "TodoListArray") as? [Item] {
-                    itemArray = items
-                }
+//        if let items  = defaults.array(forKey: "TodoListArray") as? [Item] {
+//                    itemArray = items
+//                }
         
         
         // get the todos form info plsist local storage saved form last session
@@ -62,6 +65,7 @@ class TodoListViewController: UITableViewController {
         cell.textLabel?.text = item.title
        
         cell.accessoryType = item.done ? .checkmark : .none
+        
         return cell
 //        if item.done == true {
 //            cell.accessoryType = .checkmark
@@ -78,14 +82,14 @@ class TodoListViewController: UITableViewController {
         
         
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-        
+        saveItems()
 //        if itemArray[indexPath.row].done == false {
 //            itemArray[indexPath.row].done = true
 //        } else {
 //            itemArray[indexPath.row].done = false
 //        }
         
-        tableView.reloadData() // call the data source methods again to reload the data
+//        tableView.reloadData() // call the data source methods again to reload the data
         
 //        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
 //            tableView.cellForRow(at: indexPath)?.accessoryType = .none
@@ -110,12 +114,15 @@ class TodoListViewController: UITableViewController {
             let newItem = Item() // now an object
             newItem.title = textField.text!
 //            self.itemArray.append(textField.text!)
+            self.itemArray.append(newItem)
+            
+//           cut here
+            self.saveItems()
             
             // this is gonna be saved in the info plist
-            self.defaults.set(self.itemArray, forKey: "TodoListArray") // save to local storage
+//            self.defaults.set(self.itemArray, forKey: "TodoListArray") // save to local storage
             
-            self.tableView.reloadData() // reload the data so the the table refreshes. Kind of like angulars change detection
-            // force unwrap beaucse the value of the textfield will never be nil it woll be empty string
+            
         }
         
         alert.addTextField { alertTexField in
@@ -127,6 +134,22 @@ class TodoListViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    //MARK: Manual Manipulation Models
+    
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        
+        do {
+            let data = try encoder.encode(itemArray) // first encode
+            try data.write(to: dataFilePath!)
+        } catch {
+            print("error encoding data \(error)")
+        }
+        self.tableView.reloadData() // reload the data so the the table refreshes. Kind of like angulars change detection
+        // force unwrap beaucse the value of the textfield will never be nil it woll be empty string
+    }
+    
     
 }
 
