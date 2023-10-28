@@ -20,33 +20,8 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let newItem = Item()
-        newItem.title = "Finish this chapter"
-//        newItem.done = false
-        itemArray.append(newItem)
-        
-        let newItem2 = Item()
-        newItem2.title = "Re do Tipsy"
-//        newItem2.done = false
-        itemArray.append(newItem2)
-        
-        let newItem3 = Item()
-        newItem3.title = "Build my app"
-//        newItem3.done = false
-        itemArray.append(newItem3)
-        
+        loadItems()
     
-//        if let items  = defaults.array(forKey: "TodoListArray") as? [Item] {
-//                    itemArray = items
-//                }
-        
-        
-        // get the todos form info plsist local storage saved form last session
-//        itemArray = defaults.array(forKey: "TodoListArray") as! [String]
-//        if let items  = defaults.array(forKey: "TodoListArray") as? [String] {
-//            itemArray = items
-//        }
-        // Do any additional setup after loading the view.
     }
     
     // MARK - Tableview Datasource Methods
@@ -58,44 +33,21 @@ class TodoListViewController: UITableViewController {
         print("cell for row at index path called")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
         
-//        cell.textLabel?.text = itemArray[indexPath.row]
-//        cell.textLabel?.text = itemArray[indexPath.row].title
-        
         let item = itemArray[indexPath.row]
         cell.textLabel?.text = item.title
        
         cell.accessoryType = item.done ? .checkmark : .none
         
         return cell
-//        if item.done == true {
-//            cell.accessoryType = .checkmark
-//        } else {
-//            cell.accessoryType = .none
-//        }
-        
+
     }
     
     // MARK - Tableview Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(itemArray[indexPath.row] )
         
-        
-        
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         saveItems()
-//        if itemArray[indexPath.row].done == false {
-//            itemArray[indexPath.row].done = true
-//        } else {
-//            itemArray[indexPath.row].done = false
-//        }
-        
-//        tableView.reloadData() // call the data source methods again to reload the data
-        
-//        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-//            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-//        } else {
-//            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-//        }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -113,15 +65,9 @@ class TodoListViewController: UITableViewController {
             
             let newItem = Item() // now an object
             newItem.title = textField.text!
-//            self.itemArray.append(textField.text!)
             self.itemArray.append(newItem)
-            
-//           cut here
+
             self.saveItems()
-            
-            // this is gonna be saved in the info plist
-//            self.defaults.set(self.itemArray, forKey: "TodoListArray") // save to local storage
-            
             
         }
         
@@ -148,6 +94,18 @@ class TodoListViewController: UITableViewController {
         }
         self.tableView.reloadData() // reload the data so the the table refreshes. Kind of like angulars change detection
         // force unwrap beaucse the value of the textfield will never be nil it woll be empty string
+    }
+    
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            // xcode not able to infer the array data type items
+            do {
+                itemArray = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error decoding items \(itemArray)")
+            }
+        }
     }
     
     
