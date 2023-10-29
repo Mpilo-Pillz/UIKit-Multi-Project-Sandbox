@@ -8,7 +8,7 @@
 import UIKit
 
 class BreakDownTaskListViewController: UIViewController {
-    var viewModel: TaskViewModel! = TaskViewModel()
+//    var viewModel: TaskViewModel! = TaskViewModel()
     
     let names = ["Oilz", "Pilz", "OilerPlate", ]
     var breakdownTableView = UITableView()
@@ -20,7 +20,7 @@ class BreakDownTaskListViewController: UIViewController {
         setUpTableViewContraints()
         setUpTableHEaderView()
         
-        breakdownTableView.register(TaskCell.self, forCellReuseIdentifier: "TaskCell")
+//        breakdownTableView.register(TaskCell.self, forCellReuseIdentifier: "TaskCell")
         
     }
 
@@ -30,21 +30,21 @@ class BreakDownTaskListViewController: UIViewController {
 extension BreakDownTaskListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-//        return names.count
-        return viewModel.tasks.count
+        return names.count
+//        return viewModel.tasks.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-//        let cell = UITableViewCell()
-//        cell.textLabel?.text = names[indexPath.row]
-//
-//        return cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
-        
-        let task = viewModel.tasks[indexPath.row]
-        cell.textLabel?.text = task.title
+        let cell = UITableViewCell()
+        cell.textLabel?.text = names[indexPath.row]
+
         return cell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+//
+//        let task = viewModel.tasks[indexPath.row]
+//        cell.textLabel?.text = task.title
+//        return cell
     }
     
 
