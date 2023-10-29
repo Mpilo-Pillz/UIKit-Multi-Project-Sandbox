@@ -9,17 +9,16 @@ import UIKit
 
 class TaskListViewController: UIViewController {
     var viewModel: TaskViewModel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let taskListView = TaskListView()
-                taskListView.viewModel = viewModel
-                taskListView.tableView.dataSource = self
-                view.addSubview(taskListView)
+        taskListView.viewModel = viewModel
+        taskListView.tableView.dataSource = self
 
+        view.addSubview(taskListView)
     }
-
 }
 
 extension TaskListViewController: UITableViewDataSource {
@@ -29,9 +28,10 @@ extension TaskListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+        
+        
         let task = viewModel.tasks[indexPath.row]
         cell.textLabel?.text = task.title
         return cell
     }
 }
-

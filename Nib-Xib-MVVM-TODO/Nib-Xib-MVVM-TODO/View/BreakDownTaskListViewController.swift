@@ -8,16 +8,17 @@
 import UIKit
 
 class BreakDownTaskListViewController: UIViewController {
-    var viewModel: TaskViewModel!
+    var viewModel: TaskViewModel! = TaskViewModel()
     
-    let names = ["Mpi", "Thul", "Fika"]
-    var tableView = UITableView()
+    let names = ["Oilz", "Pilz", "OilerPlate", ]
+    var breakdownTableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBrown
         
         setUpTableViewContraints()
+        setUpTableHEaderView()
         
     }
 
@@ -27,14 +28,20 @@ class BreakDownTaskListViewController: UIViewController {
 extension BreakDownTaskListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return names.count
+//        return names.count
+        return viewModel.tasks.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = UITableViewCell()
-        cell.textLabel?.text = names[indexPath.row]
+//        cell.textLabel?.text = names[indexPath.row]
+//
+//        return cell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
         
+        let task = viewModel.tasks[indexPath.row]
+        cell.textLabel?.text = task.title
         return cell
     }
     
@@ -48,21 +55,33 @@ extension BreakDownTaskListViewController: UITableViewDataSource {
 extension BreakDownTaskListViewController {
     func setUpTableViewContraints() {
 //        tableView.delegate = self
-        tableView.dataSource = self
+        breakdownTableView.dataSource = self
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
+        breakdownTableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(breakdownTableView)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+            breakdownTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            breakdownTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            breakdownTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            breakdownTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     
         
     }
     
+}
+
+extension BreakDownTaskListViewController {
+    private func setUpTableHEaderView() {
+        let header = BreakdownTaskListView(frame: .zero)
+            
+            var size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+            size.width = UIScreen.main.bounds.width
+            header.frame.size = size
+            
+            breakdownTableView.tableHeaderView = header
+    }
 }
 
 

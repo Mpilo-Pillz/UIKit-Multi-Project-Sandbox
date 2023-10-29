@@ -10,6 +10,8 @@ import UIKit
 class BreakdownTaskListView: UIView {
 
     @IBOutlet var contentView: UIView!
+//    TODOLIST
+    var viewModel: TaskViewModel!
     
     override init(frame: CGRect) {
             super.init(frame: frame)
@@ -27,7 +29,8 @@ class BreakdownTaskListView: UIView {
         
         private func commonInit() {
             let bundle = Bundle(for: BreakdownTaskListView.self)
-            bundle.loadNibNamed("TaskListView", owner: self, options: nil)
+//            Move to constaints
+            bundle.loadNibNamed("BreakdownTaskListView", owner: self, options: nil)
             addSubview(contentView)
             contentView.backgroundColor = .cyan
             

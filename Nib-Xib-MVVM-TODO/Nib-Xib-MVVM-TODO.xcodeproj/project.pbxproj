@@ -14,9 +14,11 @@
 		C44BE0032AED28D300F9D8FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C44BE0012AED28D300F9D8FB /* LaunchScreen.storyboard */; };
 		C44BE00C2AED6C6400F9D8FB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BE00B2AED6C6400F9D8FB /* Task.swift */; };
 		C44BE00F2AED6CAA00F9D8FB /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BE00E2AED6CAA00F9D8FB /* TaskViewModel.swift */; };
-		C44BE0142AED6D4A00F9D8FB /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BE0132AED6D4A00F9D8FB /* TaskListView.swift */; };
-		C44BE0162AED6DA600F9D8FB /* TaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C44BE0152AED6DA600F9D8FB /* TaskListView.xib */; };
-		C44BE0182AED6F9A00F9D8FB /* TaskCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BE0172AED6F9A00F9D8FB /* TaskCellTableViewCell.swift */; };
+		C44BE01E2AEE8AA400F9D8FB /* BreakDownTaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BE01D2AEE8AA400F9D8FB /* BreakDownTaskListViewController.swift */; };
+		C44BE0202AEE8C3700F9D8FB /* BreakdownTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BE01F2AEE8C3700F9D8FB /* BreakdownTaskListView.swift */; };
+		C44BE0222AEE8D5500F9D8FB /* BreakdownTaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C44BE0212AEE8D5500F9D8FB /* BreakdownTaskListView.xib */; };
+		C44BE0242AEE922200F9D8FB /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BE0232AEE922200F9D8FB /* TaskListView.swift */; };
+		C44BE0262AEE92F000F9D8FB /* TaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C44BE0252AEE92F000F9D8FB /* TaskListView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +31,11 @@
 		C44BE0042AED28D300F9D8FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C44BE00B2AED6C6400F9D8FB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C44BE00E2AED6CAA00F9D8FB /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
-		C44BE0132AED6D4A00F9D8FB /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
-		C44BE0152AED6DA600F9D8FB /* TaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListView.xib; sourceTree = "<group>"; };
-		C44BE0172AED6F9A00F9D8FB /* TaskCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellTableViewCell.swift; sourceTree = "<group>"; };
+		C44BE01D2AEE8AA400F9D8FB /* BreakDownTaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakDownTaskListViewController.swift; sourceTree = "<group>"; };
+		C44BE01F2AEE8C3700F9D8FB /* BreakdownTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakdownTaskListView.swift; sourceTree = "<group>"; };
+		C44BE0212AEE8D5500F9D8FB /* BreakdownTaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BreakdownTaskListView.xib; sourceTree = "<group>"; };
+		C44BE0232AEE922200F9D8FB /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		C44BE0252AEE92F000F9D8FB /* TaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,9 +100,11 @@
 			isa = PBXGroup;
 			children = (
 				C44BDFFA2AED28D200F9D8FB /* TaskListViewController.swift */,
-				C44BE0132AED6D4A00F9D8FB /* TaskListView.swift */,
-				C44BE0152AED6DA600F9D8FB /* TaskListView.xib */,
-				C44BE0172AED6F9A00F9D8FB /* TaskCellTableViewCell.swift */,
+				C44BE01D2AEE8AA400F9D8FB /* BreakDownTaskListViewController.swift */,
+				C44BE01F2AEE8C3700F9D8FB /* BreakdownTaskListView.swift */,
+				C44BE0212AEE8D5500F9D8FB /* BreakdownTaskListView.xib */,
+				C44BE0232AEE922200F9D8FB /* TaskListView.swift */,
+				C44BE0252AEE92F000F9D8FB /* TaskListView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,9 +167,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C44BE0162AED6DA600F9D8FB /* TaskListView.xib in Resources */,
+				C44BE0222AEE8D5500F9D8FB /* BreakdownTaskListView.xib in Resources */,
 				C44BE0032AED28D300F9D8FB /* LaunchScreen.storyboard in Resources */,
 				C44BE0002AED28D300F9D8FB /* Assets.xcassets in Resources */,
+				C44BE0262AEE92F000F9D8FB /* TaskListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,13 +181,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C44BE0202AEE8C3700F9D8FB /* BreakdownTaskListView.swift in Sources */,
 				C44BE00C2AED6C6400F9D8FB /* Task.swift in Sources */,
 				C44BDFFB2AED28D200F9D8FB /* TaskListViewController.swift in Sources */,
 				C44BDFF72AED28D200F9D8FB /* AppDelegate.swift in Sources */,
 				C44BE00F2AED6CAA00F9D8FB /* TaskViewModel.swift in Sources */,
-				C44BE0182AED6F9A00F9D8FB /* TaskCellTableViewCell.swift in Sources */,
 				C44BDFF92AED28D200F9D8FB /* SceneDelegate.swift in Sources */,
-				C44BE0142AED6D4A00F9D8FB /* TaskListView.swift in Sources */,
+				C44BE01E2AEE8AA400F9D8FB /* BreakDownTaskListViewController.swift in Sources */,
+				C44BE0242AEE922200F9D8FB /* TaskListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
