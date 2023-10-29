@@ -9,8 +9,9 @@ import UIKit
 
 class TaskListView: UIView {
 
-    @IBOutlet var contentView: TaskListView!
-    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet var contentView: UIView!
+    var breakdownTableView = UITableView()
     var viewModel: TaskViewModel! = TaskViewModel()
 
         required init?(coder: NSCoder) {
@@ -23,26 +24,30 @@ class TaskListView: UIView {
             commonInit()
         }
 
-        private func commonInit() {
-            let nib = UINib(nibName: "TaskListView", bundle: nil)
-            nib.instantiate(withOwner: self, options: nil)
-            addSubview(tableView)
-            tableView.frame = bounds
-            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TaskCell")
-        }
-    
-//    private func commonInit() {
-//        let bundle = Bundle(for: TaskListView.self)
-////            Move to constaints
-//        bundle.loadNibNamed("TaskListView", owner: self, options: nil)
-//        addSubview(contentView)
-//        contentView.backgroundColor = .systemMint
-//        
-//        contentView.translatesAutoresizingMaskIntoConstraints = false
-//        contentView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-//        contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-//        contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//        contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-//    }
+//        private func commonInit() {
+//            let nib = UINib(nibName: "TaskListView", bundle: nil)
+//            nib.instantiate(withOwner: self, options: nil)
+////            addSubview(tableView)
+////            tableView.frame = bounds
+////            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TaskCell")
+//
+//            addSubview(breakdownTableView)
+//            breakdownTableView.frame = bounds
+//            breakdownTableView.register(UITableViewCell.self, forCellReuseIdentifier: "TaskCell")
+//        }
+//
+    private func commonInit() {
+        let bundle = Bundle(for: TaskListView.self)
+//            Move to constaints
+        bundle.loadNibNamed("TaskListView", owner: self, options: nil)
+        addSubview(contentView)
+        contentView.backgroundColor = .systemMint
+
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
 
 }

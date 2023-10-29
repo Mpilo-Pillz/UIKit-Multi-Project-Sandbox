@@ -14,15 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
-        let taskViewModel = TaskViewModel()
+//        let taskViewModel = TaskViewModel()
         let taskListViewController = TaskListViewController()
-        taskListViewController.viewModel = taskViewModel
+        let breakDownTaskListViewController = BreakDownTaskListViewController()
+//        taskListViewController.viewModel = taskViewModel
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
 //        window?.rootViewController = taskListViewController
+//        window?.rootViewController = breakDownTaskListViewController
         window?.rootViewController = BreakDownTaskListViewController()
+//        window?.rootViewController = TaskListViewController()
+//        window?.rootViewController = NewTaskListViewController()
         
         return true
     }
