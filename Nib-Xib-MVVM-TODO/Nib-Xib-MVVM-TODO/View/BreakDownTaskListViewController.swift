@@ -20,6 +20,8 @@ class BreakDownTaskListViewController: UIViewController {
         setUpTableViewContraints()
         setUpTableHEaderView()
         
+        breakdownTableView.register(TaskCell.self, forCellReuseIdentifier: "TaskCell")
+        
     }
 
 }
@@ -34,11 +36,11 @@ extension BreakDownTaskListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = UITableViewCell()
+//        let cell = UITableViewCell()
 //        cell.textLabel?.text = names[indexPath.row]
 //
 //        return cell
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
         
         let task = viewModel.tasks[indexPath.row]
         cell.textLabel?.text = task.title

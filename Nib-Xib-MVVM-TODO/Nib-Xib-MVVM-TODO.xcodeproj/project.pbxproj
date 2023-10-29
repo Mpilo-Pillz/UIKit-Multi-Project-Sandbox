@@ -19,6 +19,7 @@
 		C44BE0222AEE8D5500F9D8FB /* BreakdownTaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C44BE0212AEE8D5500F9D8FB /* BreakdownTaskListView.xib */; };
 		C44BE0242AEE922200F9D8FB /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BE0232AEE922200F9D8FB /* TaskListView.swift */; };
 		C44BE0262AEE92F000F9D8FB /* TaskListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C44BE0252AEE92F000F9D8FB /* TaskListView.xib */; };
+		C44BE0282AEE9C3D00F9D8FB /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44BE0272AEE9C3D00F9D8FB /* TaskCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		C44BE0212AEE8D5500F9D8FB /* BreakdownTaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BreakdownTaskListView.xib; sourceTree = "<group>"; };
 		C44BE0232AEE922200F9D8FB /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		C44BE0252AEE92F000F9D8FB /* TaskListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListView.xib; sourceTree = "<group>"; };
+		C44BE0272AEE9C3D00F9D8FB /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				C44BE0212AEE8D5500F9D8FB /* BreakdownTaskListView.xib */,
 				C44BE0232AEE922200F9D8FB /* TaskListView.swift */,
 				C44BE0252AEE92F000F9D8FB /* TaskListView.xib */,
+				C44BE0272AEE9C3D00F9D8FB /* TaskCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				C44BE00F2AED6CAA00F9D8FB /* TaskViewModel.swift in Sources */,
 				C44BDFF92AED28D200F9D8FB /* SceneDelegate.swift in Sources */,
 				C44BE01E2AEE8AA400F9D8FB /* BreakDownTaskListViewController.swift in Sources */,
+				C44BE0282AEE9C3D00F9D8FB /* TaskCell.swift in Sources */,
 				C44BE0242AEE922200F9D8FB /* TaskListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

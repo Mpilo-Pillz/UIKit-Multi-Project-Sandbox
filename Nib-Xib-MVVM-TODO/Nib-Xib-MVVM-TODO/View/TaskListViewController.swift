@@ -16,6 +16,8 @@ class TaskListViewController: UIViewController {
         let taskListView = TaskListView()
         taskListView.viewModel = viewModel
         taskListView.tableView.dataSource = self
+        
+        taskListView.tableView.register(TaskCell.self, forCellReuseIdentifier: "TaskCell")
 
         view.addSubview(taskListView)
     }
