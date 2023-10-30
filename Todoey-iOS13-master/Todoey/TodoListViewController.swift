@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TodoListViewController: UITableViewController {
 
@@ -14,13 +15,14 @@ class TodoListViewController: UITableViewController {
     var itemArray = [Item]()
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Itemss.plist") // usrDomainMask is home dir
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
 //    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadItems()
+//        loadItems()
     
     }
     
@@ -63,8 +65,15 @@ class TodoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
             // Wha happens once user clicks the add Item on out UI Alert
             
-            let newItem = Item() // now an object
+            // problem here is we are trying to access persistent container that is local to App Delegate Class
+            // AppDelegate.persistentContainer wont work cos AppDelegate is a class and not the object of the Class
+            // We need to get the object created from App Delegate
+            // We use a singleton to access it and delegate prop litereally is the APPdelegate
+            // Then Down cast it as APP delegate
+           
+            let newItem = Item(context: self.context) // now an object
             newItem.title = textField.text!
+            newItem.done = false // Had to make it optional cause could not migrate data
             self.itemArray.append(newItem)
 
             self.saveItems()
@@ -84,29 +93,28 @@ class TodoListViewController: UITableViewController {
     //MARK: Manual Manipulation Models
     
     func saveItems() {
-        let encoder = PropertyListEncoder()
+        
         
         do {
-            let data = try encoder.encode(itemArray) // first encode
-            try data.write(to: dataFilePath!)
+            try context.save()
         } catch {
-            print("error encoding data \(error)")
+            print("Error saving context \(error)")
         }
         self.tableView.reloadData() // reload the data so the the table refreshes. Kind of like angulars change detection
         // force unwrap beaucse the value of the textfield will never be nil it woll be empty string
     }
     
-    func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            // xcode not able to infer the array data type items
-            do {
-                itemArray = try decoder.decode([Item].self, from: data)
-            } catch {
-                print("Error decoding items \(itemArray)")
-            }
-        }
-    }
+//    func loadItems() {
+//        if let data = try? Data(contentsOf: dataFilePath!) {
+//            let decoder = PropertyListDecoder()
+//            // xcode not able to infer the array data type items
+//            do {
+//                itemArray = try decoder.decode([Item].self, from: data)
+//            } catch {
+//                print("Error decoding items \(itemArray)")
+//            }
+//        }
+//    }
     
     
 }
