@@ -22,7 +22,8 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        loadItems()
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        loadItems()
     
     }
     
@@ -104,7 +105,14 @@ class TodoListViewController: UITableViewController {
         // force unwrap beaucse the value of the textfield will never be nil it woll be empty string
     }
     
-//    func loadItems() {
+    func loadItems() {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+           itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+        
 //        if let data = try? Data(contentsOf: dataFilePath!) {
 //            let decoder = PropertyListDecoder()
 //            // xcode not able to infer the array data type items
@@ -114,7 +122,7 @@ class TodoListViewController: UITableViewController {
 //                print("Error decoding items \(itemArray)")
 //            }
 //        }
-//    }
+    }
     
     
 }
