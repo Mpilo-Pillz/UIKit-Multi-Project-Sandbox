@@ -23,6 +23,7 @@ class TodoListViewController: UITableViewController {
         super.viewDidLoad()
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+       // searchBar.delegate = self we set it using story boards by poiting to that square view controller
         loadItems()
     
     }
@@ -48,6 +49,11 @@ class TodoListViewController: UITableViewController {
     // MARK - Tableview Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(itemArray[indexPath.row] )
+        
+//        itemArray[indexPath.row].setValue("Completed", forKey: "Title")
+        
+//        context.delete(itemArray[indexPath.row]) // first delete from db
+//        itemArray.remove(at: indexPath.row) // then delete form array else index will be non existant
         
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         saveItems()
@@ -125,7 +131,38 @@ class TodoListViewController: UITableViewController {
     }
     
     
+    
+    
 }
+
+//MARK: - Search bar methods
+
+extension TodoListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+//        added the [cd] to ingnore diacritics eg Umlout and Circomflex and gave
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        
+        request.predicate = predicate
+        
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        
+        request.sortDescriptors = [sortDescriptor]
+        
+        do {
+           itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+        
+        tableView.reloadData()
+        
+    }
+}
+
+
 
 
 
