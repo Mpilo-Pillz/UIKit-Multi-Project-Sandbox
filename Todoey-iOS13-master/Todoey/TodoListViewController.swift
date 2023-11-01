@@ -151,8 +151,21 @@ extension TodoListViewController: UISearchBarDelegate {
         loadItems(with: request) // dont need the argument cuas of defualt value tem.fetchRequest()
         
         tableView.reloadData()
-        
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // only when the text has changed and the items length is 0
+        // does this trigger
+        if searchBar.text?.count == 0 {
+          loadItems() // remember it has a default request
+//             was in the background
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+    
+    
 }
 
 
