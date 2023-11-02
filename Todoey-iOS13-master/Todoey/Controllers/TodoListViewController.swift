@@ -14,6 +14,12 @@ class TodoListViewController: UITableViewController {
     //    var itemArray = ["Finish this chapter", "Re do Tipsy", "Build my app", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "z", "x", "c", "v", "m"]
     var itemArray = [Item]()
     
+    var selectedCategory: Category? {
+        didSet {
+            loadItems()
+        }
+    }
+    
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Itemss.plist") // usrDomainMask is home dir
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -25,7 +31,7 @@ class TodoListViewController: UITableViewController {
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         // searchBar.delegate = self we set it using story boards by poiting to that square view controller
         
-        loadItems()
+//        loadItems() calling it uptop on did set cause of the segue
         
     }
     
@@ -82,6 +88,7 @@ class TodoListViewController: UITableViewController {
             let newItem = Item(context: self.context) // now an object
             newItem.title = textField.text!
             newItem.done = false // Had to make it optional cause could not migrate data
+            newItem.parentCategory = self.selectedCategory
             self.itemArray.append(newItem)
             
             self.saveItems()
@@ -112,8 +119,23 @@ class TodoListViewController: UITableViewController {
         // force unwrap beaucse the value of the textfield will never be nil it woll be empty string
     }
     
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
 //        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+//        let predicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
+//        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, predicate])
+        
+//        request.predicate = predicate
+//        request.predicate = compoundPredicate
+
+        
         do {
             itemArray = try context.fetch(request)
         } catch {
@@ -144,11 +166,13 @@ extension TodoListViewController: UISearchBarDelegate {
         let request: NSFetchRequest<Item> = Item.fetchRequest()
         
         //        added the [cd] to ingnore diacritics eg Umlout and Circomflex and gave
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+//        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
         
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
-        loadItems(with: request) // dont need the argument cuas of defualt value tem.fetchRequest()
+        loadItems(with: request, predicate: predicate) // dont need the argument cuas of defualt value tem.fetchRequest()
         
         tableView.reloadData()
     }
