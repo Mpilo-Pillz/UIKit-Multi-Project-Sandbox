@@ -8,19 +8,36 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print("did dinishe launching with options, when the app first loads up happens before view did load")
         
-        // where the file will be stored for the simulators saved local storage and th einfo plist (the sand box)
-//        print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! as String)
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        
+         let data = Data()
+         data.name = "Mpilo"
+         data.age = 120
+        
+        do {
+            let realm = try Realm()
+            try realm.write{
+                realm.add(data)
+            }
+        } catch {
+            print("Error initializing new Realm, \(error)")
+        }
+       
+        
+        
         
         return true
     }
