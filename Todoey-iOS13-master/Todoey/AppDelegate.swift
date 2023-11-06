@@ -21,12 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("did dinishe launching with options, when the app first loads up happens before view did load")
         
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+//        print(Realm.Configuration.defaultConfiguration.fileURL)
         
          
         
         do {
-            let realm = try Realm()
+             _ = try Realm()
         } catch {
             print("Error initializing new Realm, \(error)")
         }
