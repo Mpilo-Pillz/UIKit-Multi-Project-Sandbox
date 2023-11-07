@@ -51,6 +51,24 @@ class ViewController: UIViewController {
                 displayLabel.text = numValue
                 isFinishedTypingNumber = false
             } else {
+                /**
+                 * if there is a decimal place
+                 * return
+                 * eg if 5.3 rounded down is 5
+                 * if 5 is equal to 5 on the current display then this is an int add a decimal
+                 * else if it 5 is equal to 5.3 form the current display this it not an int then retrun
+                 */
+                if numValue == "." {
+                    guard let currentDisplayValue = Double(displayLabel.text!) else {
+                        fatalError("Cannot convert display label text to a double")
+                    }
+                    let isInt = floor(currentDisplayValue) == currentDisplayValue
+                    print("curr--> \(currentDisplayValue)")
+                    print("floor--> \(floor(currentDisplayValue))")
+                    if !isInt {
+                        return
+                    }
+                }
                 displayLabel.text = displayLabel.text! + numValue
             }
             
