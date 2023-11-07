@@ -18,6 +18,20 @@ class ViewController: UIViewController {
     
     private var isFinishedTypingNumber: Bool = true
     
+    private var displayValue: Double {
+        get {
+            guard let number = Double(displayLabel.text!) else {
+                fatalError("Cannot convert display lable text to double")
+            }
+            return number
+        }
+        set {
+           // set when ever the display value is updated
+            // we have to update display label to triggert his code
+            displayLabel.text = String(newValue)
+        }
+    }
+    
     @IBAction func calcButtonPressed(_ sender: UIButton) {
         //What should happen when a non-number button is pressed
         isFinishedTypingNumber = true
@@ -25,18 +39,20 @@ class ViewController: UIViewController {
         // no need to make private it is locally scoped
 //        let number = Double(displayLabel.text!)! // using if let is not always the best thing, sometimes you need it to crash
         
-        guard let number = Double(displayLabel.text!) else {
-            fatalError("Cannot convert display lable text to double")
-        }
+//        guard let number = Double(displayLabel.text!) else {
+//            fatalError("Cannot convert display lable text to double")
+//        }
         
         // optional binding
         if let calcMethod = sender.currentTitle {
             if calcMethod == "+/-" {
-                displayLabel.text = String(number * -1) // convert to negative
+//                displayLabel.text = String(displayValue * -1) // convert to negative
+                displayValue *=  -1 // convert to negative
             } else if calcMethod == "AC" {
                 displayLabel.text = "0"
             } else if calcMethod == "%" {
-                displayLabel.text = String(number * 0.01)
+//                displayLabel.text = String(displayValue * 0.01)
+                displayValue *= 0.01
             }
         }
     }
@@ -59,12 +75,13 @@ class ViewController: UIViewController {
                  * else if it 5 is equal to 5.3 form the current display this it not an int then retrun
                  */
                 if numValue == "." {
-                    guard let currentDisplayValue = Double(displayLabel.text!) else {
-                        fatalError("Cannot convert display label text to a double")
-                    }
-                    let isInt = floor(currentDisplayValue) == currentDisplayValue
-                    print("curr--> \(currentDisplayValue)")
-                    print("floor--> \(floor(currentDisplayValue))")
+//                    guard let currentDisplayValue = Double(displayLabel.text!) else {
+//                        fatalError("Cannot convert display label text to a double")
+//                    }
+//                    let isInt = floor(currentDisplayValue) == currentDisplayValue
+                    let isInt = floor(displayValue) == displayValue
+                    print("curr--> \(displayValue)")
+                    print("floor--> \(floor(displayValue))")
                     if !isInt {
                         return
                     }
