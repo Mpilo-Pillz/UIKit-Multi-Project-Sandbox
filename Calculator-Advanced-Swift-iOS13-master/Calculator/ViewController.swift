@@ -28,6 +28,17 @@ class ViewController: UIViewController {
         guard let number = Double(displayLabel.text!) else {
             fatalError("Cannot convert display lable text to double")
         }
+        
+        // optional binding
+        if let calcMethod = sender.currentTitle {
+            if calcMethod == "+/-" {
+                displayLabel.text = String(number * -1) // convert to negative
+            } else if calcMethod == "AC" {
+                displayLabel.text = "0"
+            } else if calcMethod == "%" {
+                displayLabel.text = String(number * 0.01)
+            }
+        }
     }
 
     
