@@ -19,9 +19,15 @@ class ViewController: UIViewController {
     private var isFinishedTypingNumber: Bool = true
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
-        
         //What should happen when a non-number button is pressed
         isFinishedTypingNumber = true
+        
+        // no need to make private it is locally scoped
+//        let number = Double(displayLabel.text!)! // using if let is not always the best thing, sometimes you need it to crash
+        
+        guard let number = Double(displayLabel.text!) else {
+            fatalError("Cannot convert display lable text to double")
+        }
     }
 
     
