@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 //import CoreData
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: SwipeTableViewController {
     
     //    var itemArray = ["Finish this chapter", "Re do Tipsy", "Build my app", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "z", "x", "c", "v", "m"]
 //    var itemArray = [Item]()
@@ -46,7 +46,8 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("cell for row at index path called")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let item = todoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
@@ -154,6 +155,8 @@ class TodoListViewController: UITableViewController {
 //        // force unwrap beaucse the value of the textfield will never be nil it woll be empty string
 //    }
     
+    
+    
     func loadItems() {
         
         todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
@@ -174,6 +177,19 @@ class TodoListViewController: UITableViewController {
 //            print("Error fetching data from context \(error)")
 //        }
 
+    }
+    
+    override func updateModel(at indexPath: IndexPath) {
+        if let item = todoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    realm.delete(item)
+                }
+            } catch {
+                print("Error deleting Item, \(error)")
+            }
+            
+        }
     }
     
 }
