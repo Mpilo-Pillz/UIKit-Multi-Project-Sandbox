@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class CalculatorLogic {
+// structs are first calss citizens
+struct CalculatorLogic {
     
     var number: Double
     
