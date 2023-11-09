@@ -45,15 +45,7 @@ class ViewController: UIViewController {
         
         // optional binding
         if let calcMethod = sender.currentTitle {
-            if calcMethod == "+/-" {
-//                displayLabel.text = String(displayValue * -1) // convert to negative
-                displayValue *=  -1 // convert to negative
-            } else if calcMethod == "AC" {
-                displayLabel.text = "0"
-            } else if calcMethod == "%" {
-//                displayLabel.text = String(displayValue * 0.01)
-                displayValue *= 0.01
-            }
+            
         }
     }
 
