@@ -52,6 +52,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
             
             print(results)
+            
+            if let firstResult = results.first {
+                if firstResult.identifier.contains("plate") {
+                    self.navigationItem.title = "plate"
+                } else {
+                    self.navigationItem.title = "Not plate!"
+                }
+            }
         }
         let handler = VNImageRequestHandler(ciImage: image)
         
